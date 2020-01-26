@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 as build
+FROM ubuntu:19.10 as build
 
 MAINTAINER <resl.philipp@bio.lmu.de>
 
@@ -10,7 +10,7 @@ RUN apt-get update && \
 	apt-get -y upgrade && \
 	apt-get -y install wget python2.7 python-pip && \
 	apt-get install -y bioperl cpanminus && \ 
-	apt-get install -y --no-install-recommends cmake git libboost-iostreams-dev zlib1g-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libsqlite3-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libmysql++-dev libbamtools-dev libboost-all-dev bamtools default-jre hisat2 mysql-server mysql-client libdbd-mysql-perl python-numpy=1.14 python-qt4 python-lxml python-six trimmomatic tantan && \
+	apt-get install -y --no-install-recommends cmake git libboost-iostreams-dev zlib1g-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libsqlite3-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libmysql++-dev libbamtools-dev libboost-all-dev bamtools default-jre hisat2 mysql-server mysql-client libdbd-mysql-perl python-numpy python-qt4 python-lxml python-six trimmomatic tantan && \
 	cpanm File::Which Hash::Merge JSON Logger::Simple Parallel::ForkManager Scalar::Util::Numeric Text::Soundex DBI && \
 	apt-get autoremove -y && \
 	apt-get clean -y && \
