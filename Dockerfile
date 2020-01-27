@@ -146,7 +146,7 @@ RUN wget http://trimal.cgenomics.org/_media/trimal.v1.2rev59.tar.gz && \
 # trimmomatic needs an executable called trimmomatic in the PATH. This is to set it up.
 RUN touch trimmomatic && \
 	echo '#!/bin/bash' >> trimmomatic && \
-	echo 'java -jar /usr/share/java/trimmomatic-0.36.jar "$@"' >> trimmomatic && \
+	echo 'java -jar /usr/share/java/trimmomatic-0.39.jar "$@"' >> trimmomatic && \
 	chmod 755 trimmomatic && \
 	mv trimmomatic /usr/local/bin
 
