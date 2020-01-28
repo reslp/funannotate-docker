@@ -21,18 +21,19 @@ Funannotate provides lots of different functions which depend on many different 
 :white_check_mark: feature and dependencies installed and tested
 
 
-**funannotate clean** :white_check_mark:
-**funannotate sort** :white_check_mark:
+**funannotate clean** :white_check_mark:\
+**funannotate sort** :white_check_mark:\
 **funannotate mask**:
-	tantan :x:
-	repeatmasker :white_check_mark:
-	repeatmodeler :eight_pointed_black_star:
+	tantan :x:\
+	repeatmasker :white_check_mark:\
+	repeatmodeler :eight_pointed_black_star:\
 
-**funannotate train** :eight_pointed_black_star:
-**funannotate predict**:
-	AUGUSTUS :white_check_mark:
-	Genemark :white_check_mark:
-	Snap :white_check_mark:
+
+**funannotate train** :eight_pointed_black_star:\
+**funannotate predict**:\
+	AUGUSTUS :white_check_mark:\
+	Genemark :white_check_mark:\
+	Snap :white_check_mark:\
 	GlimmerHMM :x:
 	BUSCO :white_check_mark:
 	Evidence Modeler :white_check_mark:
