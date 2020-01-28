@@ -9,38 +9,40 @@ It is still in testing phase!
 [Status of Container](#current-status-of-container)\
 [Installation](#installation)\
 [Example command](#an-example-command-for-the-funannotate-docker-container)\
-[Installed software](#installed-software)\
+[Installed software](#installed-software)
 
 
 ## Current status of container
 
 Funannotate provides lots of different functions which depend on many different programs. This list provides on overview of funannotate's basic functionality by using different symbols:
 
-:x: feature currently not working
-:eight_pointed_black_star: feature and dependencies installed but not yet tested
+:x: feature currently not working\
+:eight_pointed_black_star: feature and dependencies installed but not yet tested\
 :white_check_mark: feature and dependencies installed and tested
 
 
 **funannotate clean** :white_check_mark:\
 **funannotate sort** :white_check_mark:\
 **funannotate mask**:\
-	tantan :x:\
-	repeatmasker :white_check_mark:\
-	repeatmodeler :eight_pointed_black_star:\
+- tantan :x:\
+- repeatmasker :white_check_mark:\
+- repeatmodeler :eight_pointed_black_star:
 
 
 **funannotate train** :eight_pointed_black_star:\
 **funannotate predict**:\
-	AUGUSTUS :white_check_mark:\
-	Genemark :white_check_mark:\
-	Snap :white_check_mark:\
-	GlimmerHMM :x:\
-	BUSCO :white_check_mark:\
-	Evidence Modeler :white_check_mark:\
-	tbl2asn :white_check_mark:\
-	tRNAScan-SE :white_check_mark:\
-	Exonerate :white_check_mark:\
-	minimap :white_check_mark:\
+- AUGUSTUS :white_check_mark:\
+- Genemark :white_check_mark:\
+- Snap :white_check_mark:\
+- GlimmerHMM :x:\
+- BUSCO :white_check_mark:\
+- Evidence Modeler :white_check_mark:\
+- tbl2asn :white_check_mark:\
+- tRNAScan-SE :white_check_mark:\
+- Exonerate :white_check_mark:\
+- minimap :white_check_mark:\
+	
+	
 **funannotate fix** :eight_pointed_black_star:\
 **funannotate update** :eight_pointed_black_star:\
 **funannotate remote** :eight_pointed_black_star:\
@@ -206,4 +208,4 @@ wget 3.2\
 wheel 0.32.3\
 xlrd 1.2.0\
 XlsxWriter 1.2.7\
-zipp 1.1.0\
+zipp 1.1.0
