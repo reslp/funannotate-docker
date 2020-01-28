@@ -23,24 +23,24 @@ Funannotate provides lots of different functions which depend on many different 
 
 **funannotate clean** :white_check_mark:\
 **funannotate sort** :white_check_mark:\
-**funannotate mask**:\
-- tantan :x:\
-- repeatmasker :white_check_mark:\
+**funannotate mask**:
+- tantan :x:
+- repeatmasker :white_check_mark:
 - repeatmodeler :eight_pointed_black_star:
 
 
 **funannotate train** :eight_pointed_black_star:\
-**funannotate predict**:\
-- AUGUSTUS :white_check_mark:\
-- Genemark :white_check_mark:\
-- Snap :white_check_mark:\
-- GlimmerHMM :x:\
-- BUSCO :white_check_mark:\
-- Evidence Modeler :white_check_mark:\
-- tbl2asn :white_check_mark:\
-- tRNAScan-SE :white_check_mark:\
-- Exonerate :white_check_mark:\
-- minimap :white_check_mark:\
+**funannotate predict**:
+- AUGUSTUS :white_check_mark:
+- Genemark :white_check_mark:
+- Snap :white_check_mark:
+- GlimmerHMM :x:
+- BUSCO :white_check_mark:
+- Evidence Modeler :white_check_mark:
+- tbl2asn :white_check_mark:
+- tRNAScan-SE :white_check_mark:
+- Exonerate :white_check_mark:
+- minimap :white_check_mark:
 	
 	
 **funannotate fix** :eight_pointed_black_star:\
@@ -48,7 +48,7 @@ Funannotate provides lots of different functions which depend on many different 
 **funannotate remote** :eight_pointed_black_star:\
 **funannotate iprscan** :x:\
 **funannotate annotate**  :white_check_mark:\
-**funannotate compare**  :x:\
+**funannotate compare**  :x:
 
 
 **funannotate util** :eight_pointed_black_star:\
