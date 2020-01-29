@@ -278,12 +278,14 @@ ENV AUGUSTUS_CONFIG_PATH="/software/Augustus-3.3.2/config"
 ENV PATH="/software/Augustus-3.3.2/bin:$PATH"
 ENV PATH="/software/blat/:$PATH"
 
-ENV PATH="/root/gm_et_linux_64:$PATH"
-ENV GENEMARK_PATH="/root/gm_et_linux_64"
-ENV PATH="/root/signalp-4.1:$PATH"
-ENV FUNANNOTATE_DB="/root/database"
-
+# set workdir and set paths to external dependencies
 WORKDIR /data
+ENV PATH="/data/gm_et_linux_64:$PATH"
+ENV GENEMARK_PATH="/data/external/gm_et_linux_64"
+ENV PATH="/data/external/signalp-4.1:$PATH"
+ENV FUNANNOTATE_DB="/data/database"
+
+
 
 ENTRYPOINT ["funannotate"]
 CMD ["-v"]

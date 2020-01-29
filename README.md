@@ -24,7 +24,7 @@ Funannotate provides lots of different functions which depend on many different 
 **funannotate clean** :white_check_mark:\
 **funannotate sort** :white_check_mark:\
 **funannotate mask**:
-- tantan :x:
+- tantan :white_check_mark:
 - repeatmasker :white_check_mark:
 - repeatmodeler :eight_pointed_black_star:
 
@@ -73,7 +73,7 @@ The way to get these programs into the container is to place them into a folder 
 
 	-v /local/location_of_programs:/root/
 
-The docker container is set up in such a way as that it searches for specific folders in the root directory and adds them to the path. This way, funannotate running inside the container finds the desired programs. Currently the container is etup to add the following folders o the PATH hence the version names:
+The docker container is set up in such a way as that it searches for specific folders in the root directory and adds them to the path. This way, funannotate running inside the container finds the desired programs. Currently the container is setup to add the following folders o the PATH hence the version names:
 
 	/root/signalp-4.1
 	/root/gm_et_linux_64
@@ -99,9 +99,9 @@ Data will be stored in /data which can be mounted from an external folder as wel
 
 ## An example command for the funannotate docker container
 
-This command mount external dependencies and a database folder:
+This command mounts external dependencies and a database folder:
 
-	docker run --rm -it -v $(pwd)/external:/root -v $(pwd)/database:/root/database -v $(pwd):/data reslp/funannotate check
+	docker run --rm -it -v $(pwd):/data reslp/funannotate check
 
 
 ## Installed software
