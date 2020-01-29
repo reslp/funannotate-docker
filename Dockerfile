@@ -280,12 +280,11 @@ ENV PATH="/software/blat/:$PATH"
 
 # set workdir and set paths to external dependencies
 WORKDIR /data
-ENV PATH="/data/gm_et_linux_64:$PATH"
+ENV PATH="/data/external/gm_et_linux_64:$PATH"
 ENV GENEMARK_PATH="/data/external/gm_et_linux_64"
 ENV PATH="/data/external/signalp-4.1:$PATH"
 ENV FUNANNOTATE_DB="/data/database"
-
-
+ENV HOME="/data"
 
 ENTRYPOINT ["funannotate"]
 CMD ["-v"]
