@@ -9,7 +9,9 @@ It is still in testing phase!
 [Status of Container](#current-status-of-container)\
 [Installation](#installation)\
 [Example command](#an-example-command-for-the-funannotate-docker-container)\
+[Singularity](#singularity)\
 [Installed software](#installed-software)
+
 
 
 ## Current status of container
@@ -41,6 +43,7 @@ Funannotate provides lots of different functions which depend on many different 
 - tRNAScan-SE :white_check_mark:
 - Exonerate :white_check_mark:
 - minimap :white_check_mark:
+- CodingQuarry :eight_pointed_black_star:
 	
 	
 **funannotate fix** :eight_pointed_black_star:\
@@ -102,6 +105,18 @@ Data will be stored in /data which can be mounted from an external folder as wel
 This command mounts external dependencies and a database folder:
 
 	docker run --rm -it -v $(pwd):/data reslp/funannotate check
+
+
+## Singularity
+
+The idea is to make this container also work with Singularity. This is important because most big clusters don't allow Docker due to the high user privileges it requires. In such environments Singularity offers an alternative to Docker. With singularity it is possible to build Singularity containers directly from Dokcerhub. This of course also works with the funannotate container:
+
+```
+singularity pull docker://reslp/funannotate:latest
+
+```
+Singularity however does a few things differently compared to Docker. One important difference is, that Singularity images are read only. Only bound user directories are writable. This creates problems with some aspects of funannotate were files need to be written into common places inside the file system (eg. the case for AUGUSTUS which needs to write to $AUGUSTUS_CONFIG_PATH).
+
 
 
 ## Installed software
