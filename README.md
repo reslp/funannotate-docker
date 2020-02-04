@@ -3,6 +3,9 @@ funannotate 1.7.2 docker
 
 This is a docker image for the [funannotate](https://github.com/nextgenusfs/funannotate) genome annotation pipeline.
 
+```
+docker pull reslp/funannotate:latest
+```
 
 
 ## Table of Contents
@@ -63,6 +66,24 @@ Funannotate provides lots of different functions which depend on many different 
 
 
 ## Installation
+
+### Install the Container
+
+With a working Docker installation simple run:
+
+```
+docker pull reslp/funannotate:latest
+docker run --rm -it reslp/funannotate:latest check
+```
+
+to download and run the latest version of the container.
+
+If you wish to go inside the container you can do:
+
+```
+docker run --rm -it --entrypoint /bin/bash reslp/funannotate:latest
+```
+
 
 ### External dependencies:
 
