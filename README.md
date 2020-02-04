@@ -28,7 +28,7 @@ Funannotate provides lots of different functions which depend on many different 
 **funannotate mask**:
 - tantan :white_check_mark:
 - repeatmasker :white_check_mark:
-- repeatmodeler :eight_pointed_black_star:
+- repeatmodeler :white_check_mark:
 
 
 **funannotate train** :eight_pointed_black_star:\
@@ -115,7 +115,7 @@ The idea is to make this container also work with Singularity. This is important
 singularity pull docker://reslp/funannotate:latest
 
 ```
-Singularity however does a few things differently compared to Docker. One important difference is, that Singularity images are read only. Only bound user directories are writable. This creates problems with some aspects of funannotate were files need to be written into common places inside the file system (eg. the case for AUGUSTUS which needs to write to $AUGUSTUS_CONFIG_PATH).
+Singularity however does a few things differently compared to Docker. One important difference is, that Singularity images are read only. Only bound user directories are writable. This is important to remember when using the container. It is therefore important (even more as for Docker) to use the pre defined bind points for the database and external programs.
 
 
 
