@@ -3,7 +3,7 @@ funannotate 1.7.2 docker
 
 This is a docker image for the [funannotate](https://github.com/nextgenusfs/funannotate) genome annotation pipeline.
 
-It is still in testing phase!
+
 
 ## Table of Contents
 [Status of Container](#current-status-of-container)\
@@ -59,7 +59,7 @@ Funannotate provides lots of different functions which depend on many different 
 **funannotate test** :white_check_mark:\
 **funannotate check** :white_check_mark:\
 **funannotate species** :eight_pointed_black_star:\
-**funannotate database** :white_check_mark:\
+**funannotate database** :white_check_mark:
 
 
 ## Installation
@@ -74,14 +74,14 @@ Things not included in the Container, which need to be installed manually due to
 
 The way to get these programs into the container is to place them into a folder and then mount this folder to a specific point in the container by adding a certain flag to the docker run command:
 
-	-v /local/location_of_programs:/root/
+	-v /local/location_of_programs:/data/external
 
 The docker container is set up in such a way as that it searches for specific folders in the root directory and adds them to the path. This way, funannotate running inside the container finds the desired programs. Currently the container is setup to add the following folders o the PATH hence the version names:
 
-	/root/signalp-4.1
-	/root/gm_et_linux_64
+	/data/external/signalp-4.1
+	/data/external/gm_et_linux_64
 
-Also it expects the GeneMark license key file in /root/.
+Also it expects the GeneMark license key file in /data/.
 
 ### Setting up the funannotate database:
 
@@ -109,7 +109,7 @@ This command mounts external dependencies and a database folder:
 
 ## Singularity
 
-The idea is to make this container also work with Singularity. This is important because most big clusters don't allow Docker due to the high user privileges it requires. In such environments Singularity offers an alternative to Docker. With singularity it is possible to build Singularity containers directly from Dokcerhub. This of course also works with the funannotate container:
+The idea is to make this container also work with Singularity. This is important because most big clusters don't allow Docker due to the high user privileges it requires. In such environments Singularity offers an alternative to Docker. With singularity it is possible to build Singularity containers directly from Dockerhub. This of course also works with the funannotate container:
 
 ```
 singularity pull docker://reslp/funannotate:latest
