@@ -13,6 +13,7 @@ RUN apt-get update && \
 	apt-get install -y bioperl cpanminus && \ 
 	apt-get install -y --no-install-recommends cmake git libboost-iostreams-dev zlib1g-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libsqlite3-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libmysql++-dev libbamtools-dev libboost-all-dev bamtools default-jre hisat2 mysql-server mysql-client libdbd-mysql-perl python-numpy python-qt4 python-lxml python-six trimmomatic tantan && \
 	apt-get install -y locales-all && \
+	apt-get install -y elfutils libdw1 libdw-dev && \
 	cpanm File::Which Hash::Merge JSON Logger::Simple Parallel::ForkManager Scalar::Util::Numeric Text::Soundex DBI && \
 	apt-get autoremove -y && \
 	apt-get clean -y && \
