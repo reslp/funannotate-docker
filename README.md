@@ -51,8 +51,8 @@ Funannotate provides lots of different functions which depend on many different 
 	
 **funannotate fix** :eight_pointed_black_star:\
 **funannotate update** :eight_pointed_black_star:\
-**funannotate remote** :eight_pointed_black_star:\
-**funannotate iprscan** :x:\
+**funannotate remote** :white_check_mark:\
+**funannotate iprscan** :white_check_mark:\
 **funannotate annotate**  :white_check_mark:\
 **funannotate compare**  :x:
 
@@ -87,11 +87,12 @@ docker run --rm -it --entrypoint /bin/bash reslp/funannotate:latest
 
 ### External dependencies:
 
-Things not included in the Container, which need to be installed manually due to licensing incompatibility:
+A few programs are not included in the container. They need to be kept externally due to license incompatibility or large size:
 
 1. Signal-P 4.1: [www.cbs.dtu.dk/services/SignalP/](http://www.cbs.dtu.dk/services/SignalP/) 
 2. GeneMark-ES: [exon.gatech.edu/GeneMark/](http://exon.gatech.edu/GeneMark/)
 3. Repeatmasker libraries from RepBase
+4. InterproScan: [https://www.ebi.ac.uk/interpro/download/](https://www.ebi.ac.uk/interpro/download/)
 
 The way to get these programs into the container is to place them into a folder and then mount this folder to a specific point in the container by adding a certain flag to the docker run command:
 
@@ -102,7 +103,10 @@ The docker container is set up in such a way as that it searches for specific fo
 	/data/external/signalp-4.1
 	/data/external/gm_et_linux_64
 
-Also it expects the GeneMark license key file in /data/.
+In Docker the container expects the GeneMark license key file in /data/.
+In Sinularity it depends on how you run your container. Typically the license file needs to be in your home directory.
+
+
 
 ### Setting up the funannotate database:
 
@@ -121,12 +125,44 @@ Data will be stored in /data which can be mounted from an external folder as wel
 	-v $(pwd):/data
 
 
-## An example command for the funannotate docker container
+## Example commands for the funannotate docker container
+
+The commands presented here assume that the current working directory contains the folders database and external:
+
+```
+$ ls
+database
+external
+genome.fas
+```
+
+The external directory contains Signal-P, interproscan and genemark:
+
+```
+$ ls external
+signalp-4.1
+gm_et_linux_64
+interproscan-5.39-77.0
+```
+
+With a directory structure like this it is possible to add all external dependencies and the database with a single mount command to the container.
 
 This command mounts external dependencies and a database folder:
 
 	docker run --rm -it -v $(pwd):/data reslp/funannotate check
+	
+These commands perform clean, sort, mask and predict using the container:
 
+```
+docker run --rm -it -v $(pwd):/data reslp/funannotate clean -i /data/genome.fas -o /data/genome_cleaned.fas 
+
+docker run --rm -it -v $(pwd):/data reslp/funannotate sort -i /data/genome_cleaned.fas -o /data/genome_sorted.fas 
+
+docker run --rm -it -v $(pwd):/data reslp/funannotate mask -i /data/genome_sorted.fas -o /data/genome_masked.fas -m repeatmasker --cpus 8
+
+docker run --rm -it -v $(pwd):/data reslp/funannotate mask -i /data/genome_masked.fas -s "sample_species" -o /data/sample_species_preds --cpus 8
+
+```
 
 ## Singularity
 
@@ -175,7 +211,7 @@ RepeatMasker 4.0.7\
 RepeatModeler 1.0.10\
 tabl2asn v. latest\
 
-**Python and Python modules:**
+**Python modules:**
 
 python 2.7.17\
 asn1crypto 0.24.0\
