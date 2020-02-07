@@ -57,11 +57,11 @@ Funannotate provides lots of different functions which depend on many different 
 **funannotate compare**  :x:
 
 
-**funannotate util** :eight_pointed_black_star:\
+**funannotate util** :white_check_mark:\
 **funannotate setup** :white_check_mark:\
 **funannotate test** :white_check_mark:\
 **funannotate check** :white_check_mark:\
-**funannotate species** :eight_pointed_black_star:\
+**funannotate species** :white_check_mark:\
 **funannotate database** :white_check_mark:
 
 
