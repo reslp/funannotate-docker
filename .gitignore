@@ -2,3 +2,4 @@ external/
 database/
 
 .zhistory
+.bash_history
