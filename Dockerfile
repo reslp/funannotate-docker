@@ -22,7 +22,7 @@ RUN apt-get update && \
 # with a small modification to handle the log file move problem in remote in singularity
 RUN pip install funannotate && \
 	sed -i -e 's/os.rename/#os.rename/g' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
-	awk 'NR==301{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', log_name))"}NR==301{print "\tos.remove(log_name)"}1' remote.py > tmp && mv tmp remote.py
+	awk 'NR==301{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', log_name))"}NR==301{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/remote.py
 	#sed -i -e '290,310 s/if os.path.isfile/#if os.path.isfile/' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py
 
 
