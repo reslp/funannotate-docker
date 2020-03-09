@@ -11,7 +11,7 @@ RUN apt-get update && \
 	apt-get -y upgrade && \
 	apt-get -y install wget python2.7 python-pip && \
 	apt-get install -y bioperl cpanminus && \ 
-	apt-get install -y --no-install-recommends cmake git libboost-iostreams-dev zlib1g-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libsqlite3-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libmysql++-dev libbamtools-dev libboost-all-dev bamtools default-jre hisat2 mysql-server mysql-client libdbd-mysql-perl python-numpy python-qt4 python-lxml python-six trimmomatic tantan && \
+	apt-get install -y --no-install-recommends cmake git libboost-iostreams-dev zlib1g-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libsqlite3-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libmysql++-dev libbamtools-dev libboost-all-dev bamtools default-jre hisat2 mysql-server mysql-client libdbd-mysql-perl python-qt4 python-lxml python-six trimmomatic tantan && \
 	apt-get install -y locales-all && \
 	apt-get install -y elfutils libdw1 libdw-dev && \
 	cpanm File::Which Hash::Merge JSON Logger::Simple Parallel::ForkManager Scalar::Util::Numeric Text::Soundex DBI && \
@@ -19,14 +19,7 @@ RUN apt-get update && \
 	apt-get clean -y && \
 	rm -rf /var/lib/apt/lists/*
 
-# with a small modification to handle the log file move problem in remote in singularity
-RUN pip install funannotate && \
-	sed -i -e 's/os.rename/#os.rename/g' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
-	awk 'NR==301{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', log_name))"}NR==301{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
-	 sed -i '1405d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
-	 sed -i '1404d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
-	 awk 'NR==1404{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', '\''funannotate-annotate.log'\''))"}NR==1404{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py
-	
+
 	#sed -i -e '290,310 s/if os.path.isfile/#if os.path.isfile/' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py
 	
 
@@ -255,6 +248,18 @@ RUN rm *.gz
 #export variables:
 # to correct signalps path
 # sed -i -e 's#$ENV{SIGNALP} = *+#$ENV{SIGNALP} = \/root\/signalp-4.1#g' /root/signalp-4.1/signalp
+
+# with a small modification to handle the log file move problem in remote in singularity
+RUN pip install funannotate==1.7.2 && \
+	sed -i -e 's/os.rename/#os.rename/g' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
+	awk 'NR==301{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', log_name))"}NR==301{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
+	sed -i '1405d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
+	sed -i '1404d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
+	awk 'NR==1404{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', '\''funannotate-annotate.log'\''))"}NR==1404{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
+	pip uninstall -y matplotlib numpy seaborn pandas statsmodels && \
+	pip install matplotlib==2.2.4 numpy==1.16.5 seaborn==0.9.0 pandas==0.24.2 statsmodels==0.10.2
+	#apt-get update && apt-get install -y python-matplotlib python-numpy
+	
 
 FROM scratch 
 
