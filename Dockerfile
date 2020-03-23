@@ -301,6 +301,7 @@ RUN wget --no-check-certificate https://ccb.jhu.edu/software/glimmerhmm/dl/Glimm
 	cp train/splicescore /software/glimmerhmm/glimmerhmm/train/ && \
 	cp train/*.pm /software/glimmerhmm/glimmerhmm/train/  && \
 	cp -R trained_dir /software/glimmerhmm/glimmerhmm/
+	
 
 FROM scratch 
 
