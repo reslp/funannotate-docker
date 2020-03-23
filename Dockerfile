@@ -215,7 +215,7 @@ RUN wget http://www.repeatmasker.org/RepeatMasker-open-4-0-7.tar.gz && \
 ADD rebuild /software/RepeatMasker
 RUN perl /software/RepeatMasker/rebuild
 	
-#Repeatmodeler itself
+#Repeatmodeler
 # fixing the perl paths is from: https://github.com/chrishah/maker-docker/blob/master/repeatmasker/Dockerfile
 RUN wget http://www.repeatmasker.org/RepeatModeler/RepeatModeler-open-1.0.10.tar.gz && \
 	tar xvfz RepeatModeler-open-1.0.10.tar.gz && \
@@ -257,9 +257,50 @@ RUN pip install funannotate==1.7.2 && \
 	sed -i '1404d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
 	awk 'NR==1404{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', '\''funannotate-annotate.log'\''))"}NR==1404{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
 	pip uninstall -y matplotlib numpy seaborn pandas statsmodels && \
-	pip install matplotlib==2.2.4 numpy==1.16.5 seaborn==0.9.0 pandas==0.24.2 statsmodels==0.10.2
+	pip install matplotlib==2.0.2 numpy==1.16.5 seaborn==0.9.0 pandas==0.24.2 statsmodels==0.10.2
 	#apt-get update && apt-get install -y python-matplotlib python-numpy
-	
+# the lines above uninstalling and installing matplotlib are experimental in an attempt to fix a problem with funannotate compare, originally they are not present	
+
+#glimmerhmm
+# this uses basically the same fix as in the bioconda recipe for glimmerhmm:
+# https://github.com/bioconda/bioconda-recipes/blob/master/recipes/glimmerhmm/build.sh
+
+RUN wget --no-check-certificate https://ccb.jhu.edu/software/glimmerhmm/dl/GlimmerHMM-3.0.4.tar.gz && \
+	tar xvfz GlimmerHMM-3.0.4.tar.gz && \
+	cd GlimmerHMM && \
+	sed -i.bak "s|^escoreSTOP2:|scoreSTOP2:|g" train/makefile && \
+	sed -i.bak "s|^rfapp:|erfapp:|g" train/makefile && \
+	sed -i.bak "s| trainGlimmerHMM||g" train/makefile && \
+	sed -i.bak "s|all:    build-icm|all:    misc.o build-icm.o build-icm-noframe.o build-icm|g" train/makefile && \
+	sed -i.bak '1 s|^.*$|#!/usr/bin/env perl|g' train/trainGlimmerHMM && \
+	sed -i.bak 's|$FindBin::Bin;|"/software/glimmerhmm/glimmerhmm/train";|g' train/trainGlimmerHMM && \
+	sed -i.bak '1 s|^.*$|#!/usr/bin/env perl|g' bin/glimmhmm.pl && \
+	mkdir -p /software/glimmerhmm && \
+	mkdir -p /software/glimmerhmm/bin && \
+	mkdir -p /software/glimmerhmm/glimmerhmm && \
+	mkdir -p /software/glimmerhmm/glimmerhmm/train && \
+	make -C sources && \
+	make -C train clean && make -C train all && \
+	cp bin/glimmhmm.pl /software/glimmerhmm/bin/ && \
+	cp sources/glimmerhmm /software/glimmerhmm/bin/ && \
+	cp train/trainGlimmerHMM /software/glimmerhmm/bin/ && \
+	cp train/build-icm /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/build-icm-noframe /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/build1 /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/build2 /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/erfapp /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/falsecomp /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/findsites /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/karlin /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/score /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/score2 /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/scoreATG /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/scoreATG2 /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/scoreSTOP /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/scoreSTOP2 /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/splicescore /software/glimmerhmm/glimmerhmm/train/ && \
+	cp train/*.pm /software/glimmerhmm/glimmerhmm/train/  && \
+	cp -R trained_dir /software/glimmerhmm/glimmerhmm/ && \
 
 FROM scratch 
 
@@ -273,6 +314,8 @@ ENV PATH="/software/RepeatMasker:$PATH"
 ENV PATH="/software/RepeatModeler-open-1.0.10:$PATH"
 ENV REPEATMASKER_DIR="/software/RepeatMasker"
 
+ENV PATH="/software/glimmerhmm/bin:$PATH"
+#ENV PATH="/software/glimmerhmm/train:$PATH"
 
 ENV QUARRY_PATH="/software/CodingQuarry_v2.0/QuarryFiles"
 ENV PATH="/software/CodingQuarry_v2.0:$PATH"
