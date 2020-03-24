@@ -249,18 +249,6 @@ RUN rm *.gz
 # to correct signalps path
 # sed -i -e 's#$ENV{SIGNALP} = *+#$ENV{SIGNALP} = \/root\/signalp-4.1#g' /root/signalp-4.1/signalp
 
-# with a small modification to handle the log file move problem in remote in singularity
-RUN pip install funannotate==1.7.2 && \
-	sed -i -e 's/os.rename/#os.rename/g' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
-	awk 'NR==301{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', log_name))"}NR==301{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
-	sed -i '1405d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
-	sed -i '1404d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
-	awk 'NR==1404{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', '\''funannotate-annotate.log'\''))"}NR==1404{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
-	pip uninstall -y matplotlib numpy seaborn pandas statsmodels && \
-	pip install matplotlib==2.0.2 numpy==1.16.5 seaborn==0.9.0 pandas==0.24.2 statsmodels==0.10.2
-	#apt-get update && apt-get install -y python-matplotlib python-numpy
-# the lines above uninstalling and installing matplotlib are experimental in an attempt to fix a problem with funannotate compare, originally they are not present	
-
 #glimmerhmm
 # this uses basically the same fix as in the bioconda recipe for glimmerhmm:
 # https://github.com/bioconda/bioconda-recipes/blob/master/recipes/glimmerhmm/build.sh
@@ -302,6 +290,19 @@ RUN wget --no-check-certificate https://ccb.jhu.edu/software/glimmerhmm/dl/Glimm
 	cp train/*.pm /software/glimmerhmm/glimmerhmm/train/  && \
 	cp -R trained_dir /software/glimmerhmm/glimmerhmm/
 	
+# with a small modification to handle the log file move problem in remote in singularity
+RUN pip install funannotate==1.7.3 && \
+	sed -i -e 's/os.rename/#os.rename/g' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
+	awk 'NR==301{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', log_name))"}NR==301{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
+	sed -i '1405d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
+	sed -i '1404d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
+	awk 'NR==1404{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', '\''funannotate-annotate.log'\''))"}NR==1404{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
+	pip uninstall -y matplotlib numpy seaborn pandas statsmodels && \
+	pip install matplotlib==2.0.2 numpy==1.16.5 seaborn==0.9.0 pandas==0.24.2 statsmodels==0.10.2
+	#apt-get update && apt-get install -y python-matplotlib python-numpy
+# the lines above uninstalling and installing matplotlib are experimental in an attempt to fix a problem with funannotate compare, originally they are not present	
+
+
 
 FROM scratch 
 
