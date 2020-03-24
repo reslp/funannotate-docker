@@ -290,6 +290,7 @@ RUN wget --no-check-certificate https://ccb.jhu.edu/software/glimmerhmm/dl/Glimm
 	cp train/*.pm /software/glimmerhmm/glimmerhmm/train/  && \
 	cp -R trained_dir /software/glimmerhmm/glimmerhmm/ && \
 	chmod a+x /software/glimmerhmm/bin/* && \
+	chmod a+r /software/glimmerhmm/bin/* && \
 	chmod a+r /software/glimmerhmm/glimmerhmm/trained_dir && \
 	chmod a+x /software/glimmerhmm/glimmerhmm/trained_dir && \
 	chmod a+r /software/glimmerhmm/glimmerhmm/train/* && \
