@@ -160,7 +160,7 @@ docker run --rm -it -v $(pwd):/data reslp/funannotate sort -i /data/genome_clean
 
 docker run --rm -it -v $(pwd):/data reslp/funannotate mask -i /data/genome_sorted.fas -o /data/genome_masked.fas -m repeatmasker --cpus 8
 
-docker run --rm -it -v $(pwd):/data reslp/funannotate mask -i /data/genome_masked.fas -s "sample_species" -o /data/sample_species_preds --cpus 8
+docker run --rm -it -v $(pwd):/data reslp/funannotate predict -i /data/genome_masked.fas -s "sample_species" -o /data/sample_species_preds --cpus 8
 
 ```
 
