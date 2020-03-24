@@ -4,7 +4,7 @@ funannotate 1.7.2 docker
 This is a docker image for the [funannotate](https://github.com/nextgenusfs/funannotate) genome annotation pipeline.
 
 ```
-docker pull reslp/funannotate:latest
+docker pull reslp/funannotate:1.7.2
 ```
 
 
@@ -39,7 +39,7 @@ Funannotate provides lots of different functions which depend on many different 
 - AUGUSTUS :white_check_mark:
 - Genemark :white_check_mark:
 - Snap :white_check_mark:
-- GlimmerHMM :x:
+- GlimmerHMM :eight_pointed_black_star:
 - BUSCO :white_check_mark:
 - Evidence Modeler :white_check_mark:
 - tbl2asn :white_check_mark:
@@ -169,7 +169,7 @@ docker run --rm -it -v $(pwd):/data reslp/funannotate mask -i /data/genome_maske
 The idea is to make this container also work with Singularity. This is important because most big clusters don't allow Docker due to the high user privileges it requires. In such environments Singularity offers an alternative to Docker. With singularity it is possible to build Singularity containers directly from Dockerhub. This of course also works with the funannotate container:
 
 ```
-singularity pull docker://reslp/funannotate:latest
+singularity pull docker://reslp/funannotate:1.7.2
 
 ```
 Singularity however does a few things differently compared to Docker. One important difference is, that Singularity images are read only. Only bound user directories are writable. This is important to remember when using the container. It is therefore important (even more as for Docker) to use the pre defined bind points for the database and external programs.
