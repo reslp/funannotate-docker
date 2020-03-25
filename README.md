@@ -39,7 +39,7 @@ Funannotate provides lots of different functions which depend on many different 
 - AUGUSTUS :white_check_mark:
 - Genemark :white_check_mark:
 - Snap :white_check_mark:
-- GlimmerHMM :eight_pointed_black_star:
+- GlimmerHMM :white_check_mark:
 - BUSCO :white_check_mark:
 - Evidence Modeler :white_check_mark:
 - tbl2asn :white_check_mark:
@@ -188,6 +188,7 @@ BLAT v. latest\
 FASTA36 36.3.8\
 diamond 0.9.29\
 GMAP 2019-09-12\
+GlimmerHMM-3.0.4\
 minimap2 2.17\
 kallisto 0.46.1\
 Proteinortho 6.0.12\

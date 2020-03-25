@@ -299,6 +299,14 @@ RUN wget --no-check-certificate https://ccb.jhu.edu/software/glimmerhmm/dl/Glimm
 	chmod a+w /software/glimmerhmm/glimmerhmm/trained_dir/*/* && \
 	chmod a+r /software/glimmerhmm/glimmerhmm/trained_dir/*/*
 # the permission changes are necessary for singularity, otherwise all files can only be accessed by root
+
+#install iqtree
+
+RUN apt-get update && \
+	apt-get install -y iqtree && \
+	apt-get autoremove -y && \
+	apt-get clean -y
+
 	
 # with a small modification to handle the log file move problem in remote in singularity
 RUN pip install funannotate==1.7.3 && \
@@ -311,6 +319,7 @@ RUN pip install funannotate==1.7.3 && \
 	pip install matplotlib==2.0.2 numpy==1.16.5 seaborn==0.9.0 pandas==0.24.2 statsmodels==0.10.2
 	#apt-get update && apt-get install -y python-matplotlib python-numpy
 # the lines above uninstalling and installing matplotlib are experimental in an attempt to fix a problem with funannotate compare, originally they are not present	
+
 
 
 
