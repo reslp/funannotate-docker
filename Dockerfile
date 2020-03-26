@@ -319,11 +319,15 @@ RUN pip install funannotate==1.7.2 && \
 	pip uninstall -y matplotlib numpy seaborn pandas statsmodels && \
 	pip install matplotlib==2.0.2 numpy==1.16.5 seaborn==0.9.0 pandas==0.24.2 statsmodels==0.10.2
 	#apt-get update && apt-get install -y python-matplotlib python-numpy
-# the lines above uninstalling and installing matplotlib are experimental in an attempt to fix a problem with funannotate compare, originally they are not present	
+# the lines above uninstalling and installing matplotlib are experimental in an attempt to fix a problem with funannotate compare, originally they are not needed
 
-
-
-
+# additional experimental modifications to handle error in funannotate compare with many genomes (>60). There is a problem with creating the plots.
+# These modifications remove the plotting function for heatmaps in funannotate compare. The report should be created normally though.
+RUN sed -i -e's/lib.drawHeatmap/#lib.drawHeatmap/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
+	sed -i -e 's/args.out, '\''merops'\'', '\''MEROPS.heatmap.pdf'\''/#args.out, '\''merops'\'', '\''MEROPS.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
+	sed -i -e 's/args.out, '\''cazy'\'', '\''CAZy.heatmap.pdf'\''/#args.out, '\''cazy'\'', '\''CAZy.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
+	sed -i -e 's/args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/#args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py
+	
 FROM scratch 
 
 MAINTAINER <resl.philipp@uni-graz.at>
