@@ -326,7 +326,7 @@ RUN pip install funannotate==1.7.2 && \
 
 FROM scratch 
 
-MAINTAINER <resl.philipp@bio.lmu.de>
+MAINTAINER <resl.philipp@uni-graz.at>
 
 COPY --from=build / /
 
