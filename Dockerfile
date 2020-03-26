@@ -323,7 +323,9 @@ RUN pip install funannotate==1.7.2 && \
 
 # additional experimental modifications to handle error in funannotate compare with many genomes (>60). There is a problem with creating the plots.
 # These modifications remove the plotting function for heatmaps in funannotate compare. The report should be created normally though.
-RUN sed -i -e's/lib.drawHeatmap/#lib.drawHeatmap/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
+RUN sed -i -e's/lib.drawHeatmap(meropsplot, '\''BuPu'\'', os.path.join(/lib.log.info("Heatmap will not be plotted. This is a restriction of this Docker container.")/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
+	sed -i -e's/lib.drawHeatmap(cazyplot, '\''YlOrRd'\'', os.path.join(/lib.log.info("Heatmap will not be plotted. This is a restriction of this Docker container.")/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
+	sed -i -e's/lib.drawHeatmap(dfmerged, '\''Blues'\'', os.path.join(/lib.log.info("Heatmap will not be plotted. This is a restriction of this Docker container.")/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
 	sed -i -e 's/args.out, '\''merops'\'', '\''MEROPS.heatmap.pdf'\''/#args.out, '\''merops'\'', '\''MEROPS.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
 	sed -i -e 's/args.out, '\''cazy'\'', '\''CAZy.heatmap.pdf'\''/#args.out, '\''cazy'\'', '\''CAZy.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
 	sed -i -e 's/args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/#args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py
