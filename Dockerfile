@@ -328,12 +328,14 @@ RUN sed -i -e's/lib.drawHeatmap(meropsplot, '\''BuPu'\'', os.path.join(/lib.log.
 	sed -i -e's/lib.drawHeatmap(dfmerged, '\''Blues'\'', os.path.join(/lib.log.info("Heatmap will not be plotted. This is a restriction of this Docker container.")/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
 	sed -i -e 's/args.out, '\''merops'\'', '\''MEROPS.heatmap.pdf'\''/#args.out, '\''merops'\'', '\''MEROPS.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
 	sed -i -e 's/args.out, '\''cazy'\'', '\''CAZy.heatmap.pdf'\''/#args.out, '\''cazy'\'', '\''CAZy.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
-	sed -i -e 's/args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/#args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py
-	
+	sed -i -e 's/args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/#args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
+	sed -i -e 's/# build phylogeny/lib.log.info("Inferring phylogeny is skipped. This is a limitation of this Docker container")/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
+	sed -i 1191,1212d /usr/local/lib/python2.7/dist-packages/funannotate/compare.py
+
+
 FROM scratch 
 
 MAINTAINER <resl.philipp@uni-graz.at>
-
 COPY --from=build / /
 
 ENV RMBLAST_DIR=/software/rmblast-2.10.0/bin
