@@ -2,7 +2,8 @@ FROM ubuntu:19.10 as build
 
 MAINTAINER <resl.philipp@bio.lmu.de>
 
-WORKDIR /software
+WORKDIR /software 
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 #these two layers should take care of all the python and perl dependencies:
