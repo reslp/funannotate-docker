@@ -310,7 +310,7 @@ RUN apt-get update && \
 
 	
 # with a small modification to handle the log file move problem in remote in singularity
-RUN pip install funannotate==1.7.2 && \
+RUN pip install funannotate==1.7.4 && \
 	sed -i -e 's/os.rename/#os.rename/g' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
 	awk 'NR==301{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', log_name))"}NR==301{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
 	sed -i '1405d' /usr/local/lib/python2.7/dist-packages/funannotate/annotate.py && \
@@ -330,7 +330,7 @@ RUN sed -i -e's/lib.drawHeatmap(meropsplot, '\''BuPu'\'', os.path.join(/lib.log.
 	sed -i -e 's/args.out, '\''cazy'\'', '\''CAZy.heatmap.pdf'\''/#args.out, '\''cazy'\'', '\''CAZy.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
 	sed -i -e 's/args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/#args.out, '\''tfs'\'', '\''TF.heatmap.pdf'\''/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
 	sed -i -e 's/# build phylogeny/lib.log.info("Inferring phylogeny is skipped. This is a limitation of this Docker container")/g' /usr/local/lib/python2.7/dist-packages/funannotate/compare.py && \
-	sed -i 1191,1212d /usr/local/lib/python2.7/dist-packages/funannotate/compare.py
+	sed -i 1191,1214d /usr/local/lib/python2.7/dist-packages/funannotate/compare.py
 
 
 FROM scratch 
