@@ -54,7 +54,7 @@ Funannotate provides lots of different functions which depend on many different 
 **funannotate remote** :white_check_mark:\
 **funannotate iprscan** :white_check_mark:\
 **funannotate annotate**  :white_check_mark:\
-**funannotate compare**  :x:
+**funannotate compare**  :eight_pointed_black_star: (works with reslp/funannotate:experimental, this is contains stripped down version of comape)
 
 
 **funannotate util** :white_check_mark:\
@@ -105,6 +105,29 @@ The docker container is set up in such a way as that it searches for specific fo
 
 In Docker the container expects the GeneMark license key file in /data/.
 In Sinularity it depends on how you run your container. Typically the license file needs to be in your home directory.
+
+**A Note on SignalP:**
+
+You need to change the `signalp` script to point to the correct directory (inside the container) otherwise signalp will fail to run. It should look like this:
+
+```
+###############################################################################
+#               GENERAL SETTINGS: CUSTOMIZE TO YOUR SITE
+###############################################################################
+
+# full path to the signalp-4.1 directory on your system (mandatory)
+BEGIN {
+    $ENV{SIGNALP} = '/data/external/signalp-4.1';
+}
+
+# determine where to store temporary files (must be writable to all users)
+my $outputDir = "/tmp";
+
+# max number of sequences per run (any number can be handled)
+my $MAX_ALLOWED_ENTRIES=100000;
+```
+
+
 
 
 
