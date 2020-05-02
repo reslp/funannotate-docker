@@ -54,7 +54,7 @@ Funannotate provides lots of different functions which depend on many different 
 **funannotate remote** :white_check_mark:\
 **funannotate iprscan** :white_check_mark:\
 **funannotate annotate**  :white_check_mark:\
-**funannotate compare**  :eight_pointed_black_star: (works with reslp/funannotate:experimental, this is contains stripped down version of comape)
+**funannotate compare**  :eight_pointed_black_star: (works with experimental image `reslp/funannotate:experimental`, this contains stripped down version of compare)
 
 
 **funannotate util** :white_check_mark:\
