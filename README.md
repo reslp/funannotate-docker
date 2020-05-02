@@ -1,10 +1,12 @@
-funannotate 1.7.2 docker
+funannotate docker
 ======
 
 This is a docker image for the [funannotate](https://github.com/nextgenusfs/funannotate) genome annotation pipeline.
 
 ```
 docker pull reslp/funannotate:1.7.2
+docker pull reslp/funannotate:1.7.4
+docker pull reslp/funannotate:experimental
 ```
 
 
