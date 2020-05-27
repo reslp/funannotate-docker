@@ -306,7 +306,9 @@ RUN apt-get update && \
 	apt-get autoremove -y && \
 	apt-get clean -y
 
-	
+# install biopython before funannotate to get the last version compatible with python2.7
+RUN pip install biopython==1.76
+
 # with a small modification to handle the log file move problem in remote in singularity
 RUN pip install funannotate==1.7.4
 
