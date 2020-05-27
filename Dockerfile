@@ -24,7 +24,7 @@ RUN apt-get update && \
 
 #Software dependencies:
 #CodingQuarry
-RUN wget https://sourceforge.net/projects/codingquarry/files/CodingQuarry_v2.0.tar.gz && \ 
+RUN wget -O CodingQuarry_v2.0.tar.gz https://sourceforge.net/projects/codingquarry/files/CodingQuarry_v2.0.tar.gz/download?use_mirror=svwh#z && \ 
 	tar xvfz CodingQuarry_v2.0.tar.gz && \
 	cd CodingQuarry_v2.0 && \
 	make
