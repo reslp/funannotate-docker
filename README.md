@@ -203,7 +203,7 @@ Singularity however does a few things differently compared to Docker. One import
 
 ## Installed software
 
-**The funannotate container includes:**
+**The funannotate container includes (version numbers refer to the latest build tag and the latest version):**
 
 funannotate 1.7.4 or funannotate 1.7.2\
 CodingQuarry 2.0\
@@ -225,7 +225,7 @@ tRNA-Scan SE 2.0.5\
 Infernal 1.1.3\
 trimmomatic 0.39\
 tantan 22\
-trimal 1.2rev59\
+trimal 1.4.1\
 PASA 2.4.1\
 EvidenceModeler 1.1.1\
 ete3 3.0.0b35\

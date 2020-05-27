@@ -138,9 +138,9 @@ RUN wget http://eddylab.org/infernal/infernal-1.1.3-linux-intel-gcc.tar.gz && \
 #RUN apt-get update -y && apt-get install -y tantan
 
 #trimal
-RUN wget http://trimal.cgenomics.org/_media/trimal.v1.2rev59.tar.gz && \
-	tar xvfz trimal.v1.2rev59.tar.gz && \
-	cd trimAl/source && \
+RUN wget https://github.com/scapella/trimal/archive/v1.4.1.tar.gz && \
+	tar xvfz v1.4.1.tar.gz && \
+	cd trimal-1.4.1/source && \
 	make
 
 
