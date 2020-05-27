@@ -56,7 +56,7 @@ Funannotate provides lots of different functions which depend on many different 
 **funannotate remote** :white_check_mark:\
 **funannotate iprscan** :white_check_mark:\
 **funannotate annotate**  :white_check_mark:\
-**funannotate compare**  :eight_pointed_black_star: (works with experimental image `reslp/funannotate:experimental`, this contains stripped down version of compare)
+**funannotate compare**  :eight_pointed_black_star: (works with experimental image `reslp/funannotate:experimental`, this contains stripped down version of compare without phylogenetic reconstruction)
 
 
 **funannotate util** :white_check_mark:\
@@ -205,7 +205,7 @@ Singularity however does a few things differently compared to Docker. One import
 
 **The funannotate container includes:**
 
-funannotate 1.7.2\
+funannotate 1.7.4 or funannotate 1.7.2\
 CodingQuarry 2.0\
 Trinity 2.8.6\
 Augustus 3.3.2\
@@ -219,7 +219,7 @@ kallisto 0.46.1\
 Proteinortho 6.0.12\
 pslCDnaFilter v. latest\
 salmon 1.1.0\
-snap v. latest github\
+snap v. github commit daf76badb477d22c08f2628117c00e057bf95ccf\
 stringtie 2.0.6\
 tRNA-Scan SE 2.0.5\
 Infernal 1.1.3\
