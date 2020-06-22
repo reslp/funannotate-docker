@@ -6,7 +6,8 @@ This is a docker image for the [funannotate](https://github.com/nextgenusfs/funa
 ```
 docker pull reslp/funannotate:1.7.2
 docker pull reslp/funannotate:1.7.4
-docker pull reslp/funannotate:experimental
+docker pull reslp/funannotate:experimental # removes phylogenetic reconstruction and heatmaps from funannotate compare
+docker pull reslp/funannotate:git_clone # based on latest commit on build date: June 22, 2020
 ```
 
 
