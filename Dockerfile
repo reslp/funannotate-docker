@@ -216,9 +216,9 @@ RUN perl /software/RepeatMasker/rebuild
 	
 #Repeatmodeler
 # fixing the perl paths is from: https://github.com/chrishah/maker-docker/blob/master/repeatmasker/Dockerfile
-RUN wget http://www.repeatmasker.org/RepeatModeler/RepeatModeler-open-1.0.10.tar.gz && \
-	tar xvfz RepeatModeler-open-1.0.10.tar.gz && \
-	cd RepeatModeler-open-1.0.10 && \
+RUN wget http://www.repeatmasker.org/RepeatModeler/RepeatModeler-2.0.1.tar.gz && \
+	tar xvfz RepeatModeler-2.0.1.tar.gz && \
+	cd RepeatModeler-2.0.1 && \
 	perl -i -0pe 's/^#\!.*/#\!\/usr\/bin\/env perl/g' \
 	configure \
 	BuildDatabase \
@@ -334,7 +334,7 @@ COPY --from=build / /
 ENV RMBLAST_DIR=/software/rmblast-2.10.0/bin
 ENV RECON_DIR=/software/RECON-1.08/bin
 ENV PATH="/software/RepeatMasker:$PATH"
-ENV PATH="/software/RepeatModeler-open-1.0.10:$PATH"
+ENV PATH="/software/RepeatModeler-2.0.1:$PATH"
 ENV REPEATMASKER_DIR="/software/RepeatMasker"
 
 ENV PATH="/software/glimmerhmm/bin:$PATH"
