@@ -235,7 +235,7 @@ RepeatScout 1.0.6\
 TRF 409\
 rmblast 2.10.0+\
 RepeatMasker 4.0.7\
-RepeatModeler 1.0.10\
+RepeatModeler 2.0.1\
 tabl2asn v. latest\
 
 **Python modules:**
