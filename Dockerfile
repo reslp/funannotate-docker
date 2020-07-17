@@ -356,7 +356,7 @@ COPY --from=build / /
 ENV RMBLAST_DIR=/software/rmblast-2.10.0/bin
 ENV RECON_DIR=/software/RECON-1.08/bin
 ENV PATH="/software/RepeatMasker:$PATH"
-ENV PATH="/software/RepeatModeler-1.0.11:$PATH"
+ENV PATH="/software/RepeatModeler-open-1.0.11:$PATH"
 ENV REPEATMASKER_DIR="/software/RepeatMasker"
 
 ENV PATH="/software/glimmerhmm/bin:$PATH"
