@@ -216,9 +216,9 @@ RUN perl /software/RepeatMasker/rebuild
 	
 #Repeatmodeler
 # fixing the perl paths is from: https://github.com/chrishah/maker-docker/blob/master/repeatmasker/Dockerfile
-RUN wget http://www.repeatmasker.org/RepeatModeler/RepeatModeler-2.0.1.tar.gz && \
-	tar xvfz RepeatModeler-2.0.1.tar.gz && \
-	cd RepeatModeler-2.0.1 && \
+RUN wget http://www.repeatmasker.org/RepeatModeler/RepeatModeler-open-1.0.11.tar.gz && \
+	tar xvfz RepeatModeler-open-1.0.11.tar.gz && \
+	cd RepeatModeler-open-1.0.11 && \
 	perl -i -0pe 's/^#\!.*/#\!\/usr\/bin\/env perl/g' \
 	configure \
 	BuildDatabase \
@@ -229,12 +229,33 @@ RUN wget http://www.repeatmasker.org/RepeatModeler/RepeatModeler-2.0.1.tar.gz &&
 	util/dfamConsensusTool.pl \
 	util/renameIds.pl \
 	util/viewMSA.pl && \
-	sed -i -e 's#/usr/local/RECON#/software/RECON-1.08/bin#g' RepModelConfig.pm && \
-	sed -i -e 's#/usr/local/RepeatScout-1.0.6#/software/RepeatScout-1.0.6#g' RepModelConfig.pm && \
-	sed -i -e 's#/usr/local/rmblast/bin#/software/rmblast-2.10.0/bin#g' RepModelConfig.pm && \
-	sed -i -e 's#/usr/local/RepeatMasker#/software/RepeatMasker#g' RepModelConfig.pm && \
-	sed -i -e 's#/usr/local/bin/trf409.linux64#/usr/local/bin/trf#g' RepModelConfig.pm
-	#cp RepModelConfig.pm.tmpl RepModelConfig.pm
+	sed -i -e 's#RECON_DIR = \"/usr/local/bin\"#RECON_DIR = \"/software/RECON-1.08/bin\"#g' RepModelConfig.pm.tmpl && \
+	sed -i -e 's#RSCOUT_DIR = \"/usr/local/bin/\"#RSCOUT_DIR = \"/software/RepeatScout-1.0.6\"#g' RepModelConfig.pm.tmpl && \
+	sed -i -e 's#RMBLAST_DIR      = \"/usr/local/rmblast\"#RMBLAST_DIR      = \"/software/rmblast-2.10.0/bin\"#g' RepModelConfig.pm.tmpl && \
+	sed -i -e 's#REPEATMASKER_DIR = \"/usr/local/RepeatMasker\"#REPEATMASKER_DIR = \"/software/RepeatMasker\"#g' RepModelConfig.pm.tmpl && \
+	cp RepModelConfig.pm.tmpl RepModelConfig.pm
+		
+
+# code for repeatmodeler 2 can be used when funannotate supports it.
+#RUN wget http://www.repeatmasker.org/RepeatModeler/RepeatModeler-2.0.1.tar.gz && \
+# 	tar xvfz RepeatModeler-2.0.1.tar.gz && \
+# 	cd RepeatModeler-2.0.1 && \
+# 	perl -i -0pe 's/^#\!.*/#\!\/usr\/bin\/env perl/g' \
+# 	configure \
+# 	BuildDatabase \
+# 	Refiner \
+# 	RepeatClassifier \
+# 	RepeatModeler \
+# 	TRFMask \
+# 	util/dfamConsensusTool.pl \
+# 	util/renameIds.pl \
+# 	util/viewMSA.pl && \
+# 	sed -i -e 's#/usr/local/RECON#/software/RECON-1.08/bin#g' RepModelConfig.pm && \
+# 	sed -i -e 's#/usr/local/RepeatScout-1.0.6#/software/RepeatScout-1.0.6#g' RepModelConfig.pm && \
+# 	sed -i -e 's#/usr/local/rmblast/bin#/software/rmblast-2.10.0/bin#g' RepModelConfig.pm && \
+# 	sed -i -e 's#/usr/local/RepeatMasker#/software/RepeatMasker#g' RepModelConfig.pm && \
+# 	sed -i -e 's#/usr/local/bin/trf409.linux64#/usr/local/bin/trf#g' RepModelConfig.pm
+# 	#cp RepModelConfig.pm.tmpl RepModelConfig.pm
 		
 
 #tbl2asn
@@ -335,7 +356,7 @@ COPY --from=build / /
 ENV RMBLAST_DIR=/software/rmblast-2.10.0/bin
 ENV RECON_DIR=/software/RECON-1.08/bin
 ENV PATH="/software/RepeatMasker:$PATH"
-ENV PATH="/software/RepeatModeler-2.0.1:$PATH"
+ENV PATH="/software/RepeatModeler-1.0.11:$PATH"
 ENV REPEATMASKER_DIR="/software/RepeatMasker"
 
 ENV PATH="/software/glimmerhmm/bin:$PATH"
