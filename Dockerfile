@@ -188,15 +188,15 @@ RUN wget http://tandem.bu.edu/trf/downloads/trf409.linux64 && \
 	chmod +x trf409.linux64 && \
 	mv trf409.linux64 /usr/local/bin/trf
 # rmblast
-RUN wget http://www.repeatmasker.org/rmblast-2.10.0+-x64-linux.tar.gz && \
-	tar xvfz rmblast-2.10.0+-x64-linux.tar.gz
+RUN wget http://www.repeatmasker.org/rmblast-2.9.0+-p2-x64-linux.tar.gz && \
+	tar xvfz rmblast-2.9.0+-p2-x64-linux.tar.gz
 #Repeatmasker
 # fixing the perl paths is from: https://github.com/chrishah/maker-docker/blob/master/repeatmasker/Dockerfile
 RUN wget http://www.repeatmasker.org/RepeatMasker-open-4-0-7.tar.gz && \
 	tar xvfz RepeatMasker-open-4-0-7.tar.gz && \
 	sed -i -e 's#TRF_PRGM = ""#TRF_PRGM = \"/usr/local/bin/trf\"#g' RepeatMasker/RepeatMaskerConfig.tmpl && \
 	sed -i -e 's#DEFAULT_SEARCH_ENGINE = \"crossmatch\"#DEFAULT_SEARCH_ENGINE = \"ncbi\"#g' RepeatMasker/RepeatMaskerConfig.tmpl && \
-	sed -i -e 's#RMBLAST_DIR   = \"/usr/local/rmblast\"#RMBLAST_DIR   = \"/software/rmblast-2.10.0/bin\"#g' RepeatMasker/RepeatMaskerConfig.tmpl && \
+	sed -i -e 's#RMBLAST_DIR   = \"/usr/local/rmblast\"#RMBLAST_DIR   = \"/software/rmblast-2.9.0-p2/bin\"#g' RepeatMasker/RepeatMaskerConfig.tmpl && \
 	sed -i -e 's#REPEATMASKER_DIR          = \"\$FindBin::RealBin\"#REPEATMASKER_DIR          = \"/software/RepeatMasker\"#g' RepeatMasker/RepeatMaskerConfig.tmpl && \
 	cp RepeatMasker/RepeatMaskerConfig.tmpl RepeatMasker/RepeatMaskerConfig.pm && \
 	perl -i -0pe 's/^#\!.*perl.*/#\!\/usr\/bin\/env perl/g' \
@@ -231,7 +231,7 @@ RUN wget http://www.repeatmasker.org/RepeatModeler/RepeatModeler-open-1.0.11.tar
 	util/viewMSA.pl && \
 	sed -i -e 's#RECON_DIR = \"/usr/local/bin\"#RECON_DIR = \"/software/RECON-1.08/bin\"#g' RepModelConfig.pm.tmpl && \
 	sed -i -e 's#RSCOUT_DIR = \"/usr/local/bin/\"#RSCOUT_DIR = \"/software/RepeatScout-1.0.6\"#g' RepModelConfig.pm.tmpl && \
-	sed -i -e 's#RMBLAST_DIR      = \"/usr/local/rmblast\"#RMBLAST_DIR      = \"/software/rmblast-2.10.0/bin\"#g' RepModelConfig.pm.tmpl && \
+	sed -i -e 's#RMBLAST_DIR      = \"/usr/local/rmblast\"#RMBLAST_DIR      = \"/software/rmblast-2.9.0-p2/bin\"#g' RepModelConfig.pm.tmpl && \
 	sed -i -e 's#REPEATMASKER_DIR = \"/usr/local/RepeatMasker\"#REPEATMASKER_DIR = \"/software/RepeatMasker\"#g' RepModelConfig.pm.tmpl && \
 	cp RepModelConfig.pm.tmpl RepModelConfig.pm
 		
@@ -252,7 +252,7 @@ RUN wget http://www.repeatmasker.org/RepeatModeler/RepeatModeler-open-1.0.11.tar
 # 	util/viewMSA.pl && \
 # 	sed -i -e 's#/usr/local/RECON#/software/RECON-1.08/bin#g' RepModelConfig.pm && \
 # 	sed -i -e 's#/usr/local/RepeatScout-1.0.6#/software/RepeatScout-1.0.6#g' RepModelConfig.pm && \
-# 	sed -i -e 's#/usr/local/rmblast/bin#/software/rmblast-2.10.0/bin#g' RepModelConfig.pm && \
+# 	sed -i -e 's#/usr/local/rmblast/bin#/software/rmblast-2.9.0-p2/bin#g' RepModelConfig.pm && \
 # 	sed -i -e 's#/usr/local/RepeatMasker#/software/RepeatMasker#g' RepModelConfig.pm && \
 # 	sed -i -e 's#/usr/local/bin/trf409.linux64#/usr/local/bin/trf#g' RepModelConfig.pm
 # 	#cp RepModelConfig.pm.tmpl RepModelConfig.pm
@@ -353,7 +353,7 @@ MAINTAINER <resl.philipp@bio.lmu.de>
 
 COPY --from=build / /
 
-ENV RMBLAST_DIR=/software/rmblast-2.10.0/bin
+ENV RMBLAST_DIR=/software/rmblast-2.9.0-p2/bin
 ENV RECON_DIR=/software/RECON-1.08/bin
 ENV PATH="/software/RepeatMasker:$PATH"
 ENV PATH="/software/RepeatModeler-open-1.0.11:$PATH"

@@ -233,7 +233,7 @@ ete3 3.0.0b35\
 RECON 1.08\
 RepeatScout 1.0.6\
 TRF 409\
-rmblast 2.10.0+\
+rmblast 2.9.0+\
 RepeatMasker 4.0.7\
 RepeatModeler 2.0.1\
 tabl2asn v. latest\
