@@ -140,9 +140,9 @@ Funannotate relies on a larger dataset of different kinds which it uses to add f
 
 	funannotate setup
 
-The docker container has the location folder for the database hardcoded (by setting the FUNANNOTATE_DB environment variable) to /root/database/. This folder needs to be overwritten with the local location of the database when funannotate is run. This is again done when docker run is invoked:
+The docker container has the location folder for the database hardcoded (by setting the FUNANNOTATE_DB environment variable) to /data/database/. This folder needs to be overwritten with the local location of the database when funannotate is run. This is again done when docker run is invoked:
 
-	-v /local/location/of/database:/root/database
+	-v /local/location/of/database:/data/database
 
 ### Where is my data?
 
