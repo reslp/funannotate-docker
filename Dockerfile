@@ -1,6 +1,6 @@
 FROM ubuntu:19.10 as build
 
-MAINTAINER <resl.philipp@bio.lmu.de>
+MAINTAINER <philipp.resl@uni-graz.at>
 
 WORKDIR /software
 ARG DEBIAN_FRONTEND=noninteractive
@@ -8,18 +8,15 @@ ARG DEBIAN_FRONTEND=noninteractive
 #these two layers should take care of all the python and perl dependencies:
 #removed python-numpy from apt-get
 RUN apt-get update && \
-	apt-get -y install wget python2.7 python-pip && \
+	apt-get -y install wget python3 python3-pip && \
 	apt-get install -y bioperl cpanminus && \ 
-	apt-get install -y --no-install-recommends cmake git libboost-iostreams-dev zlib1g-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libsqlite3-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libmysql++-dev libbamtools-dev libboost-all-dev bamtools default-jre hisat2 mysql-server mysql-client libdbd-mysql-perl python-qt4 python-lxml python-six trimmomatic tantan && \
+	apt-get install -y --no-install-recommends cmake git libboost-iostreams-dev zlib1g-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libsqlite3-dev libgsl-dev libboost-graph-dev libboost-all-dev libsuitesparse-dev liblpsolve55-dev libmysql++-dev libbamtools-dev libboost-all-dev bamtools default-jre hisat2 mysql-server mysql-client libdbd-mysql-perl python-qt4 python3-lxml python3-six trimmomatic tantan && \
 	apt-get install -y locales-all && \
 	apt-get install -y elfutils libdw1 libdw-dev && \
 	cpanm File::Which Hash::Merge JSON Logger::Simple Parallel::ForkManager Scalar::Util::Numeric Text::Soundex DBI && \
 	apt-get autoremove -y && \
 	apt-get clean -y && \
 	rm -rf /var/lib/apt/lists/*
-
-
-	#sed -i -e '290,310 s/if os.path.isfile/#if os.path.isfile/' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py
 	
 
 #Software dependencies:
@@ -61,7 +58,7 @@ RUN wget http://faculty.virginia.edu/wrpearson/fasta/fasta36/fasta-36.3.8g.tar.g
 	cp ../bin/fasta36 /usr/local/bin/fasta
 
 #diamond
-RUN wget http://github.com/bbuchfink/diamond/releases/download/v0.9.29/diamond-linux64.tar.gz && \
+RUN wget https://github.com/bbuchfink/diamond/releases/download/v2.0.4/diamond-linux64.tar.gz && \
 	tar xvfz diamond-linux64.tar.gz && \
 	mv diamond /usr/local/bin
 
@@ -165,9 +162,6 @@ RUN wget https://github.com/EVidenceModeler/EVidenceModeler/archive/v1.1.1.tar.g
 	tar xvfz v1.1.1.tar.gz
 
 
-#ete3
-# this installs a slightly older version, but the pyqt issue does not occur with it.
-RUN pip install --upgrade ete3==3.0.0b35
 
 
 ####RepeatModeler - several dependcies needed for that
@@ -328,11 +322,15 @@ RUN apt-get update && \
 	apt-get autoremove -y && \
 	apt-get clean -y
 
-# install biopython before funannotate to get the last version compatible with python2.7
-RUN pip install biopython==1.76
+
+#ete3
+# this installs a slightly older version, but the pyqt issue does not occur with it.
+RUN pip3 install --upgrade ete3
+
+RUN pip3 install biopython==1.77
 
 # with a small modification to handle the log file move problem in remote in singularity
-RUN pip install funannotate==1.7.4
+RUN pip3 install funannotate==1.8.1
 
 #sed -i -e 's/os.rename/#os.rename/g' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
 #awk 'NR==301{print "\tshutil.copy(log_name, os.path.join(outputdir, '\''logfiles'\'', log_name))"}NR==301{print "\tos.remove(log_name)"}1' /usr/local/lib/python2.7/dist-packages/funannotate/remote.py > /usr/local/lib/python2.7/dist-packages/funannotate/tmp && mv /usr/local/lib/python2.7/dist-packages/funannotate/tmp /usr/local/lib/python2.7/dist-packages/funannotate/remote.py && \
@@ -349,7 +347,7 @@ RUN pip install funannotate==1.7.4
 
 FROM scratch 
 
-MAINTAINER <resl.philipp@bio.lmu.de>
+MAINTAINER <philipp.resl@uni-graz.at>
 
 COPY --from=build / /
 

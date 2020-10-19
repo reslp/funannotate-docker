@@ -6,8 +6,9 @@ This is a docker image for the [funannotate](https://github.com/nextgenusfs/funa
 ```
 docker pull reslp/funannotate:1.7.2
 docker pull reslp/funannotate:1.7.4
-docker pull reslp/funannotate:experimental # removes phylogenetic reconstruction and heatmaps from funannotate compare
-docker pull reslp/funannotate:git_clone # based on latest commit on build date: June 22, 2020
+docker pull reslp/funannotate:1.8.1
+docker pull reslp/funannotate:experimental # removes phylogenetic reconstruction and heatmaps from funannotate compare (based on 1.7.4)
+docker pull reslp/funannotate:git_clone # based on latest commit on build date: June 22, 2020 (based on 1.7.4)
 ```
 
 
@@ -195,7 +196,7 @@ docker run --rm -it -v $(pwd):/data reslp/funannotate predict -i /data/genome_ma
 The idea is to make this container also work with Singularity. This is important because most big clusters don't allow Docker due to the high user privileges it requires. In such environments Singularity offers an alternative to Docker. With singularity it is possible to build Singularity containers directly from Dockerhub. This of course also works with the funannotate container:
 
 ```
-singularity pull docker://reslp/funannotate:1.7.2
+singularity pull docker://reslp/funannotate:1.8.1
 
 ```
 Singularity however does a few things differently compared to Docker. One important difference is, that Singularity images are read only. Only bound user directories are writable. This is important to remember when using the container. It is therefore important (even more as for Docker) to use the pre defined bind points for the database and external programs.
@@ -206,13 +207,13 @@ Singularity however does a few things differently compared to Docker. One import
 
 **The funannotate container includes (version numbers refer to the latest build tag and the latest version):**
 
-funannotate 1.7.4 or funannotate 1.7.2\
+funannotate 1.7.4 or funannotate 1.7.2 or funannotate 1.8.1\
 CodingQuarry 2.0\
 Trinity 2.8.6\
 Augustus 3.3.2\
 BLAT v. latest\
 FASTA36 36.3.8\
-diamond 0.9.29\
+diamond 0.9.29 (funannotate 1.7.2 and 1.7.4) diamond 2.0.4 (funannotate 1.8.1)\
 GMAP 2019-09-12\
 GlimmerHMM-3.0.4\
 minimap2 2.17\
@@ -240,7 +241,7 @@ tabl2asn v. latest\
 
 **Python modules:**
 
-python 2.7.17\
+python 2.7.17 or python3 (funannotate > 1.8.1)\
 asn1crypto 0.24.0\
 atomicwrites 1.3.0\
 attrs 19.3.0\
