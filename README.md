@@ -7,10 +7,13 @@ This is a docker image for the [funannotate](https://github.com/nextgenusfs/funa
 docker pull reslp/funannotate:1.7.2
 docker pull reslp/funannotate:1.7.4
 docker pull reslp/funannotate:1.8.1
+docker pull reslp/funannotate:1.8.3
 docker pull reslp/funannotate:experimental # removes phylogenetic reconstruction and heatmaps from funannotate compare (based on 1.7.4)
 docker pull reslp/funannotate:git_clone # based on latest commit on build date: June 22, 2020 (based on 1.7.4)
 ```
 
+**Note:** As of funannotate version 1.8.3 the container is based on a conda installation of funannotate. This lead to major changes in the Dockerfile. The basis for container versions pre 1.8.3 as the second Dockerfile: `Dockerfile_pre_1.8.3`
+ 
 
 ## Table of Contents
 [Status of Container](#current-status-of-container)\
