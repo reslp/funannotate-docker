@@ -3,8 +3,9 @@ FROM reslp/mamba:0.5.3
 RUN conda config --add channels defaults && \
 	conda config --add channels bioconda && \
 	conda config --add channels conda-forge && \
-	mamba install -y funannotate=1.8.3 "python>=3.6,<3.9" "augustus=3.3" "trinity==2.8.5" "evidencemodeler==1.1.1" "pasa==2.4.1" "codingquarry==2.0"
+	mamba install -y funannotate=1.8.3 "python>=3.6,<3.9" "augustus=3.3" "trinity==2.8.5" "evidencemodeler==1.1.1" "pasa==2.4.1" "codingquarry==2.0" "perl=5.26.2"
 
+# some of the mamba packages need to be version controlled for the set PATH variables to be correct. See below.
 
 WORKDIR /software
 
@@ -103,6 +104,16 @@ RUN wget http://trna.ucsc.edu/software/trnascan-se-2.0.5.tar.gz && \
 	./configure && \
 	make && \
 	make install 
+	
+# install missing perl modules:
+# to be able to run genemarK:
+#RUN cpanm YAML
+
+# creating locales to prevent perl warning in singularity:
+RUN apt-get install -y locales locales-all
+ENV LC_ALL=en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US.UTF-8
 
 # set paths specific to funannotate installation
 ENV EVM_HOME="/opt/conda/opt/evidencemodeler-1.1.1"
@@ -111,6 +122,8 @@ ENV QUARRY_PATH="/opt/conda/opt/codingquarry-2.0/QuarryFiles"
 ENV ZOE="/opt/conda/bin/snap"
 ENV PASAHOME="/opt/conda/opt/pasa-2.4.1"
 ENV AUGUSTUS_CONFIG_PATH="/opt/conda/config"
+
+ENV PERL5LIB="/opt/conda/lib/site_perl/5.26.2"
 
 # set path specific to repeatmasker and repeatmodeler
 ENV RMBLAST_DIR=/software/rmblast-2.9.0-p2/bin
@@ -126,3 +139,5 @@ ENV GENEMARK_PATH="/data/external/gm_et_linux_64"
 ENV PATH="/data/external/signalp-4.1:$PATH"
 ENV FUNANNOTATE_DB="/data/database"
 ENV HOME="/data"
+
+
