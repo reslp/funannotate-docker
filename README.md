@@ -1,5 +1,7 @@
 funannotate docker
 ======
+![Docker Pulls](https://img.shields.io/docker/pulls/reslp/funannotate?style=flat-square)
+![Docker Image Version (latest by date)](https://img.shields.io/docker/v/reslp/funannotate?style=flat-square)
 
 This is a docker image for the [funannotate](https://github.com/nextgenusfs/funannotate) genome annotation pipeline.
 
@@ -8,6 +10,7 @@ docker pull reslp/funannotate:1.7.2
 docker pull reslp/funannotate:1.7.4
 docker pull reslp/funannotate:1.8.1
 docker pull reslp/funannotate:1.8.3
+docker pull reslp/funannotate:1.8.3_antismashV6 # this version contains a fix to correctly parse Antismash V6 results
 docker pull reslp/funannotate:experimental # removes phylogenetic reconstruction and heatmaps from funannotate compare (based on 1.7.4)
 docker pull reslp/funannotate:git_clone # based on latest commit on build date: June 22, 2020 (based on 1.7.4)
 ```
