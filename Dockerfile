@@ -3,7 +3,7 @@ FROM reslp/mamba:0.5.3
 RUN conda config --add channels defaults && \
 	conda config --add channels bioconda && \
 	conda config --add channels conda-forge && \
-	mamba install -y funannotate=1.8.3 "python>=3.6,<3.9" "augustus=3.3" "trinity==2.8.5" "evidencemodeler==1.1.1" "pasa==2.4.1" "codingquarry==2.0" "perl=5.26.2"
+	mamba install -y funannotate=1.8.7 "python>=3.6,<3.9" "augustus=3.3" "trinity==2.8.5" "evidencemodeler==1.1.1" "pasa==2.4.1" "codingquarry==2.0" "perl=5.26.2"
 
 # some of the mamba packages need to be version controlled for the set PATH variables to be correct. See below.
 
@@ -109,11 +109,15 @@ RUN wget http://trna.ucsc.edu/software/trnascan-se-2.0.5.tar.gz && \
 # to be able to run genemarK:
 #RUN cpanm YAML
 
+
 # creating locales to prevent perl warning in singularity:
 RUN apt-get install -y locales locales-all
 ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
+
+RUN rm /opt/conda/lib/python3.7/site-packages/funannotate/library.py
+ADD library.py /opt/conda/lib/python3.7/site-packages/funannotate/library.py
 
 # set paths specific to funannotate installation
 ENV EVM_HOME="/opt/conda/opt/evidencemodeler-1.1.1"
@@ -140,4 +144,7 @@ ENV PATH="/data/external/signalp-4.1:$PATH"
 ENV FUNANNOTATE_DB="/data/database"
 ENV HOME="/data"
 
+# this fixes a problem with fasta2agp during the annotate step. There was a recent commit which should also fix this (https://github.com/nextgenusfs/funannotate/commit/ab0488b278d96d89ec6006199f0c22181aeca793)
 
+
+RUN sed -i 's#ACGTN#ACGTNRYSWKMBDHV#g' /opt/conda/lib/python3.7/site-packages/funannotate/aux_scripts/fasta2agp.pl
