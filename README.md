@@ -12,6 +12,7 @@ docker pull reslp/funannotate:1.8.1
 docker pull reslp/funannotate:1.8.3
 docker pull reslp/funannotate:1.8.3_antismashV6 # this version contains a fix to correctly parse Antismash V6 results
 docker pull reslp/funannotate:1.8.7
+docker pull reslp/funannotate:1.8.11
 docker pull reslp/funannotate:experimental # removes phylogenetic reconstruction and heatmaps from funannotate compare (based on 1.7.4)
 docker pull reslp/funannotate:git_clone # based on latest commit on build date: June 22, 2020 (based on 1.7.4)
 ```
@@ -214,28 +215,28 @@ Singularity however does a few things differently compared to Docker. One import
 
 **The funannotate container includes (version numbers refer to the latest build tag and the latest version):**
 
-funannotate 1.7.4 or funannotate 1.7.2 or funannotate 1.8.1\
+funannotate 1.8.11\
 CodingQuarry 2.0\
-Trinity 2.8.6\
-Augustus 3.3.2\
-BLAT v. latest\
+Trinity 2.8.5\
+Augustus 3.3.3\
+BLAT 2.2.31+\
 FASTA36 36.3.8\
-diamond 0.9.29 (funannotate 1.7.2 and 1.7.4) diamond 2.0.4 (funannotate 1.8.1)\
-GMAP 2019-09-12\
+diamond 2.0.15\ 
+GMAP 2021-08-25\
 GlimmerHMM-3.0.4\
-minimap2 2.17\
+minimap2 2.24-r1122\
 kallisto 0.46.1\
-Proteinortho 6.0.12\
+Proteinortho 6.0.33\
 pslCDnaFilter v. latest\
-salmon 1.1.0\
-snap v. github commit daf76badb477d22c08f2628117c00e057bf95ccf\
-stringtie 2.0.6\
-tRNA-Scan SE 2.0.5\
+salmon 0.14.1\
+snap 2006-07-28\
+stringtie 2.2.1\
+tRNA-Scan SE 2.0.9 (July 2021)\
 Infernal 1.1.3\
 trimmomatic 0.39\
 tantan 22\
 trimal 1.4.1\
-PASA 2.4.1\
+PASA 2.5.2\
 EvidenceModeler 1.1.1\
 ete3 3.0.0b35\
 RECON 1.08\
@@ -244,75 +245,18 @@ TRF 409\
 rmblast 2.9.0+\
 RepeatMasker 4.0.7\
 RepeatModeler 2.0.1\
-tabl2asn v. latest\
 
 **Python modules:**
 
-python 2.7.17 or python3 (funannotate > 1.8.1)\
-asn1crypto 0.24.0\
-atomicwrites 1.3.0\
-attrs 19.3.0\
-backports.functools-lru-cache 1.6.1\
-biopython 1.76\
-certifi 2019.11.28\
-chardet 3.0.4\
-configparser 4.0.2\
-contextlib2 0.6.0.post1\
-coverage 5.0.3\
-cryptography 2.6.1\
-cycler 0.10.0\
-dbus-python 1.2.12\
-docopt 0.6.2\
-entrypoints 0.3\
-enum34 1.1.6\
-ete3 3.0.0b35\
-funannotate 1.7.2\
-funcsigs 1.0.2\
-goatools 0.9.9\
-idna 2.8\
-importlib-metadata 1.4.0\
-ipaddress 1.0.17\
-keyring 18.0.1\
-keyrings.alt 3.1.1\
-kiwisolver 1.1.0\
-lxml 4.4.1\
-matplotlib 2.2.4\
-more-itertools 5.0.0\
-natsort 6.2.0\
-nose 1.3.7\
-numpy 1.16.2\
-packaging 20.1\
-pandas 0.24.2\
-pathlib2 2.3.5\
-patsy 0.5.1\
-pip 18.1\
-pluggy 0.13.1\
-psutil 5.6.7\
-py 1.8.1\
-pycrypto 2.6.1\
-pydot 1.4.1\
-PyGObject 3.34.0\
-pyparsing 2.4.6\
-pytest 4.6.9\
-pytest-cov 2.8.1\
-python-dateutil 2.8.1\
-pytz 2019.3\
-pyxdg 0.25\
-requests 2.22.0\
-scandir 1.10.0\
-scikit-learn 0.20.4\
-scipy 1.2.3\
-seaborn 0.9.1\
-SecretStorage 2.3.1\
-setuptools 41.1.0\
-sip 4.19.18\
-six 1.12.0\
-statsmodels 0.11.0\
-subprocess32 3.5.4\
-urllib3 1.25.8\
-wcwidth 0.1.8\
-wget 3.2\
-wheel 0.32.3\
-xlrd 1.2.0\
-XlsxWriter 1.2.7\
-zipp 1.1.0
+python 3.8.12\
+biopython: 1.77\
+goatools: 1.2.3\
+matplotlib: 3.4.3\
+natsort: 8.1.0\
+numpy: 1.23.1\
+pandas: 1.4.3\
+psutil: 5.9.1\
+requests: 2.28.1\
+scikit-learn: 1.1.2\
+scipy: 1.8.0\
+seaborn: 0.11.2\

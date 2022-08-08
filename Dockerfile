@@ -1,15 +1,16 @@
-FROM reslp/mamba:0.5.3
+FROM reslp/mamba:0.21.1
 
 RUN conda config --add channels defaults && \
 	conda config --add channels bioconda && \
 	conda config --add channels conda-forge && \
-	mamba install -y funannotate=1.8.7 "python>=3.6,<3.9" "augustus=3.3" "trinity==2.8.5" "evidencemodeler==1.1.1" "pasa==2.4.1" "codingquarry==2.0" "perl=5.26.2"
-
+	#mamba install -y funannotate=1.8.11 "python>=3.6,<3.9" "augustus=3.4" "trinity==2.8.5" "evidencemodeler==1.1.1" "pasa==2.4.1" "codingquarry==2.0" "perl=5.26.2" "diamond=2.0.7"
+	mamba install -y augustus=3.4 && \
+	mamba install -y funannotate=1.8.11 "python>=3.6,<3.9"
 # some of the mamba packages need to be version controlled for the set PATH variables to be correct. See below.
 
 WORKDIR /software
 
-RUN apt-get update && apt-get install -y build-essential
+RUN apt-get --allow-releaseinfo-change update && apt-get install -y build-essential
 ####RepeatModeler - several dependcies needed for that
 # RECON
 RUN wget http://www.repeatmasker.org/RepeatModeler/RECON-1.08.tar.gz && \
@@ -116,15 +117,15 @@ ENV LC_ALL=en_US.UTF-8
 ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US.UTF-8
 
-RUN rm /opt/conda/lib/python3.7/site-packages/funannotate/library.py
-ADD library.py /opt/conda/lib/python3.7/site-packages/funannotate/library.py
+#RUN rm /opt/conda/lib/python3.7/site-packages/funannotate/library.py
+#ADD library.py /opt/conda/lib/python3.7/site-packages/funannotate/library.py
 
 # set paths specific to funannotate installation
 ENV EVM_HOME="/opt/conda/opt/evidencemodeler-1.1.1"
 ENV TRINITYHOME="/opt/conda/opt/trinity-2.8.5"
 ENV QUARRY_PATH="/opt/conda/opt/codingquarry-2.0/QuarryFiles"
 ENV ZOE="/opt/conda/bin/snap"
-ENV PASAHOME="/opt/conda/opt/pasa-2.4.1"
+ENV PASAHOME="/opt/conda/opt/pasa-2.5.2"
 ENV AUGUSTUS_CONFIG_PATH="/opt/conda/config"
 
 ENV PERL5LIB="/opt/conda/lib/site_perl/5.26.2"
@@ -144,7 +145,12 @@ ENV PATH="/data/external/signalp-4.1:$PATH"
 ENV FUNANNOTATE_DB="/data/database"
 ENV HOME="/data"
 
+# fix missing perl module:
+RUN cpanm local::lib
+
+# install pigz
+RUN mamba install pigz
 # this fixes a problem with fasta2agp during the annotate step. There was a recent commit which should also fix this (https://github.com/nextgenusfs/funannotate/commit/ab0488b278d96d89ec6006199f0c22181aeca793)
 
 
-RUN sed -i 's#ACGTN#ACGTNRYSWKMBDHV#g' /opt/conda/lib/python3.7/site-packages/funannotate/aux_scripts/fasta2agp.pl
+#RUN sed -i 's#ACGTN#ACGTNRYSWKMBDHV#g' /opt/conda/lib/python3.7/site-packages/funannotate/aux_scripts/fasta2agp.pl
