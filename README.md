@@ -12,7 +12,8 @@ docker pull reslp/funannotate:1.8.1
 docker pull reslp/funannotate:1.8.3
 docker pull reslp/funannotate:1.8.3_antismashV6 # this version contains a fix to correctly parse Antismash V6 results
 docker pull reslp/funannotate:1.8.7
-docker pull reslp/funannotate:1.8.11
+docker pull reslp/funannotate:1.8.11 (currently broken due to broken augustus in bioconda!)
+docker pull reslp/funannotate:1.8.13
 docker pull reslp/funannotate:experimental # removes phylogenetic reconstruction and heatmaps from funannotate compare (based on 1.7.4)
 docker pull reslp/funannotate:git_clone # based on latest commit on build date: June 22, 2020 (based on 1.7.4)
 ```

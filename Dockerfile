@@ -4,8 +4,7 @@ RUN conda config --add channels defaults && \
 	conda config --add channels bioconda && \
 	conda config --add channels conda-forge && \
 	#mamba install -y funannotate=1.8.11 "python>=3.6,<3.9" "augustus=3.4" "trinity==2.8.5" "evidencemodeler==1.1.1" "pasa==2.4.1" "codingquarry==2.0" "perl=5.26.2" "diamond=2.0.7"
-	mamba install -y augustus=3.4 && \
-	mamba install -y funannotate=1.8.11 "python>=3.6,<3.9"
+	mamba install -y funannotate=1.8.13 "python>=3.6,<3.9" glimmerhmm=3.0.4=pl526hf484d3e_3 augustus=3.4.0
 # some of the mamba packages need to be version controlled for the set PATH variables to be correct. See below.
 
 WORKDIR /software
@@ -105,6 +104,11 @@ RUN wget http://trna.ucsc.edu/software/trnascan-se-2.0.5.tar.gz && \
 	./configure && \
 	make && \
 	make install 
+
+#RUN git clone https://github.com/Gaius-Augustus/Augustus.git 
+
+#&& cd Augustus && git checkout v3.4.0 && \
+#    make augustus
 	
 # install missing perl modules:
 # to be able to run genemarK:
@@ -119,6 +123,9 @@ ENV LANGUAGE=en_US.UTF-8
 
 #RUN rm /opt/conda/lib/python3.7/site-packages/funannotate/library.py
 #ADD library.py /opt/conda/lib/python3.7/site-packages/funannotate/library.py
+
+#possible workaround for conda augustus problem "compilation error"
+RUN rm /opt/conda/bin/augustus && apt install -y augustus && ln -s /usr/bin/augustus /opt/conda/bin/augustus
 
 # set paths specific to funannotate installation
 ENV EVM_HOME="/opt/conda/opt/evidencemodeler-1.1.1"
